@@ -1,55 +1,49 @@
 <template>
-  <div id="app">
-    <header>
-      <b-container>
-        <nav class="navbar navbar-light">
-          <div class="container-fluid">
-            <Logo />
-            <DarkMode />
-          </div>
-        </nav>
-      </b-container>
-    </header>
-    <main>
-      <b-container>
-        <Secrets />
-      </b-container>
-    </main>
-    <footer class="fixed-bottom">
-      <AppConfig />
-    </footer>
+  <div class="common-layout">
+    <el-container>
+      <el-header>
+        <AppLogo />
+      </el-header>
+      <el-main>
+        <SealedSecrets />
+      </el-main>
+      <el-footer class="footer">
+        <AppConfig />
+      </el-footer>
+    </el-container>
   </div>
 </template>
 
 <script>
-import Secrets from './components/Secrets.vue'
-import Logo from './components/Logo.vue'
-import DarkMode from './components/DarkMode.vue'
-import AppConfig from './components/AppConfig.vue'
+import AppLogo from "./components/AppLogo.vue"
+import SealedSecrets from "./components/SealedSecrets.vue"
+import AppConfig from "./components/AppConfig.vue"
 
 export default {
   name: 'App',
   components: {
-    Secrets,
-    Logo,
-    DarkMode,
+    AppLogo,
+    SealedSecrets,
     AppConfig
   }
 }
 </script>
 
-<style scoped>
-
-main {
-  margin-bottom: 80px;
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
 }
 
-footer {
-  background: #eee;
-  height: 40px;
-}
-
-html.dark footer {
-  background: #333;
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
 }
 </style>
