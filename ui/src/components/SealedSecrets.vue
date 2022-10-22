@@ -12,11 +12,12 @@
           justify="center"
           :gutter="20"
         >
-          <el-col :span="3">
+          <el-col :span="4">
             <el-select
               v-model="namespaceName"
               class="m-2"
               placeholder="Namespace"
+              filterable="true"
             >
               <el-option
                 v-for="item in namespaces"
@@ -30,7 +31,7 @@
               deployed.
             </div>
           </el-col>
-          <el-col :span="6">
+          <el-col :span="5">
             <el-input
               id="input-secret-name"
               v-model="secretName"
@@ -91,9 +92,9 @@
           <el-col :span="8">
             <el-input
               v-model="secret.value"
-              :rows="3"
               type="textarea"
               placeholder="Secret value"
+              autosize
             />
           </el-col>
           <el-col :span="1">
@@ -136,7 +137,7 @@
           <el-col :span="2">
             <el-button
               round
-              type="primary"
+              type="info"
               @click="secrets.push({ key: '', value: '' })"
             >
               Add key-value pair
@@ -155,13 +156,14 @@
       </el-form>
     </div>
     <div v-else>
-      <el-row justify="left">
+      <el-row
+        justify="center"
+        :gutter="20"
+      >
         <el-col :span="12">
-          <code
-            id="sealed-secret-result"
-            class="code-return"
-          >
-            <pre ref="sealedSecret">apiVersion: bitnami.com/v1alpha1
+          <el-scrollbar>
+            <div class="scrollbar-flex-content">
+              <pre ref="sealedSecret">apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
   name: {{ secretName }}
@@ -169,22 +171,31 @@ metadata:
 spec:
   encryptedData: 
 {{ renderedSecrets }}
-            </pre>
-          </code>
+              </pre>
+            </div>
+          </el-scrollbar>
         </el-col>
       </el-row>
       <el-row
         justify="center"
         :gutter="20"
       >
-        <el-col :span="12">
+        <el-col :span="6">
           <el-button
             v-if="clipboardAvailable"
-            class="primary"
+            type="success"
             @click="copyRenderedSecrets()"
           >
             <ContentCopy size="25px" />
             Copy complete secret
+          </el-button>
+        </el-col>
+        <el-col :span="6">
+          <el-button
+            type="info"
+            @click="displayCreateSealedSecretForm=!displayCreateSealedSecretForm"
+          >
+            Encrypt more secrets
           </el-button>
         </el-col>
       </el-row>
@@ -203,16 +214,6 @@ spec:
           >
             <ContentCopy size="25px" />
             Copy key: <code>{{ secret["key"] }}</code>
-          </el-button>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col>
-          <el-button
-            class="primary"
-            @click="displayCreateSealedSecretForm=!displayCreateSealedSecretForm"
-          >
-            Encrypt more secrets
           </el-button>
         </el-col>
       </el-row>
@@ -391,9 +392,10 @@ export default {
   margin-bottom: 10px;
 }
 
-code {
+pre {
   font-family: Consolas, "courier new";
   padding: 2px;
   font-size: 105%;
+  text-align: left;
 }
 </style>
