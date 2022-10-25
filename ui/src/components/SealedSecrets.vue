@@ -17,7 +17,7 @@
               v-model="namespaceName"
               class="m-2"
               placeholder="Namespace"
-              filterable="true"
+              filterable
             >
               <el-option
                 v-for="item in namespaces"
@@ -101,10 +101,9 @@
             <el-button
               circle
               link
-              size="medium"
               @click="removeSecret"
             >
-              <Delete size="25px" />
+              <Delete />
             </el-button>
           </el-col>
         </el-row>
@@ -193,7 +192,7 @@ spec:
         <el-col :span="6">
           <el-button
             type="info"
-            @click="displayCreateSealedSecretForm=!displayCreateSealedSecretForm"
+            @click="displayCreateSealedSecretForm = !displayCreateSealedSecretForm"
           >
             Encrypt more secrets
           </el-button>
