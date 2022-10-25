@@ -185,7 +185,7 @@ spec:
             type="success"
             @click="copyRenderedSecrets()"
           >
-            <ContentCopy size="25px" />
+            <ContentCopy />
             Copy complete secret
           </el-button>
         </el-col>
@@ -211,7 +211,7 @@ spec:
             link
             @click="copySealedSecret(counter)"
           >
-            <ContentCopy size="25px" />
+            <ContentCopy />
             Copy key: <code>{{ secret["key"] }}</code>
           </el-button>
         </el-col>
