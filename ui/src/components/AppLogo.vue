@@ -34,10 +34,6 @@ import Brightness6 from 'vue-material-design-icons/Brightness6.vue';
 
 const isDark = useDark()
 
-function toggleDark() {
-  useToggle(isDark)
-}
-
 const logo = require('../assets/logo.png')
 export default {
   name: 'AppLogo',
@@ -48,6 +44,12 @@ export default {
     return {
       logo,
       isDark: useDark()
+    }
+  },
+  methods: {
+    toggleDark: function () {
+      this.isDark = !this.isDark
+      useToggle(this.isDark)
     }
   }
 }
